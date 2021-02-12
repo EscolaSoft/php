@@ -2,7 +2,9 @@ FROM php:7.0-apache
 
 
 # Install developer dependencies
-RUN apt-get update -yqq && apt-get dist-upgrade -yqq && apt-get install -y git curl libaio1 unzip libaio1 libxslt-dev libsqlite3-dev libsqlite3-0 libxml2-dev libicu-dev libfreetype6-dev libmcrypt-dev git libcurl4-gnutls-dev libbz2-dev libssl-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmagickwand-dev mcrypt -yqq
+RUN apt-get update -yqq && apt-get dist-upgrade -yqq && apt-get install -y git curl libaio1 unzip libaio1 libxslt-dev libsqlite3-dev libsqlite3-0 libxml2-dev libicu-dev libfreetype6-dev libmcrypt-dev git libcurl4-gnutls-dev libbz2-dev libssl-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmagickwand-dev mcrypt -yqq && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
 
 # Install php extensions
 RUN docker-php-ext-install pdo_mysql
