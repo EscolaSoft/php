@@ -1,7 +1,7 @@
 FROM php:7.4-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
-
+ 
 
 RUN apt-get update -y && apt-get install -y \
   curl \
