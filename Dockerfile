@@ -1,7 +1,7 @@
 FROM php:7.4-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
- 
+
 
 RUN apt-get update -y && apt-get install -y \
   curl \
@@ -16,6 +16,11 @@ RUN apt-get update -y && apt-get install -y \
   sudo \
   gnupg \
   gnupg2 \
+  zlib1g-dev \
+  zlib1g \
+  libpng-dev \
+  libpq-dev \
+  libicu-dev \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -27,7 +32,6 @@ RUN docker-php-ext-install -j$(nproc) \
   pdo \
   pdo_mysql \
   gd \
-  imap \
   pdo_pgsql \
   pgsql \
   intl
@@ -71,12 +75,12 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   apt-get update && \
   apt-get -y install nodejs gcc g++ make && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
-  
+
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt update && apt -y install yarn && \
