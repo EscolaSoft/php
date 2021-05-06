@@ -92,12 +92,12 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 # Apache + xdebug configuration
 RUN { \
   echo "<VirtualHost *:80>"; \
-  echo "  DocumentRoot ${ABSOLUTE_APACHE_DOCUMENT_ROOT}"; \
+  echo "  DocumentRoot /var/www/html/public"; \
   echo "  LogLevel warn"; \
   echo "  ErrorLog /var/log/apache2/error.log"; \
   echo "  CustomLog /var/log/apache2/access.log combined"; \
   echo "  ServerSignature Off"; \
-  echo "  <Directory ${ABSOLUTE_APACHE_DOCUMENT_ROOT}>"; \
+  echo "  <Directory /var/www/html/public>"; \
   echo "    Options +FollowSymLinks"; \
   echo "    Options -ExecCGI -Includes -Indexes"; \
   echo "    AllowOverride all"; \
