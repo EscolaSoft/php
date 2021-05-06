@@ -34,7 +34,8 @@ RUN docker-php-ext-install -j$(nproc) \
   gd \
   pdo_pgsql \
   pgsql \
-  intl
+  intl \
+  calendar
 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
