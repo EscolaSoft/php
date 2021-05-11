@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -76,18 +76,6 @@ RUN apt-get update -y && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
-
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
-  apt-get update && \
-  apt-get -y install nodejs gcc g++ make && \
-  apt-get autoremove -y && \
-  rm -rf /var/lib/apt/lists/*
-
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt update && apt -y install yarn && \
-  apt-get autoremove -y && \
-  rm -rf /var/lib/apt/lists/*
 
 # Apache + xdebug configuration
 RUN { \
