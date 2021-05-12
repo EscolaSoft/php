@@ -92,7 +92,7 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 # Apache + xdebug configuration
 RUN { \
-  echo "<VirtualHost *:80>"; \
+  echo "<VirtualHost *:8080>"; \
   echo "  DocumentRoot /var/www/html/public"; \
   echo "  LogLevel warn"; \
   echo "  ErrorLog /var/log/apache2/error.log"; \
