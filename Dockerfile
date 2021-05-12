@@ -113,6 +113,8 @@ RUN { \
   echo "</VirtualHost>"; \
   } | tee /etc/apache2/sites-available/000-default.conf
 
+RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf
+
 RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   echo "date.timezone = Europe/Warsaw" > /usr/local/etc/php/conf.d/timezone.ini && \
   echo "log_errors = On\nerror_log = /dev/stderr" > /usr/local/etc/php/conf.d/errors.ini && \
@@ -120,5 +122,5 @@ RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   usermod -u 1000 www-data && \
   usermod -G staff www-data
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["apache2-foreground"]
