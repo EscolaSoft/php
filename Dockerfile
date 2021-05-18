@@ -21,6 +21,7 @@ RUN apt-get update -y && apt-get install -y \
   libpng-dev \
   libpq-dev \
   libicu-dev \
+  supervisor \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
