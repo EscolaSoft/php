@@ -72,13 +72,26 @@ RUN apt-get update -y && apt-get install -y \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
-  
+
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 #Add Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
+
+#node + yarn
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+  apt-get update && \
+  apt-get -y install nodejs gcc g++ make && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt update && apt -y install yarn && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
 
 # Apache + xdebug configuration
 RUN { \
