@@ -88,7 +88,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
 #PDO_MSSQL
 RUN pecl install sqlsrv pdo_sqlsrv &&  docker-php-ext-enable pdo_sqlsrv
 RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr
-
+RUN sed -i 's/DEFAULT@SECLEVEL=1/DEFAULT@SECLEVEL=2/g' /etc/ssl/openssl.cnf
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   apt-get update && \
