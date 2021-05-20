@@ -79,7 +79,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
 
-$PDO_MSSQL
+#PDO_MSSQL
 RUN pecl install sqlsrv pdo_sqlsrv &&  docker-php-ext-enable pdo_sqlsrv
 
 
