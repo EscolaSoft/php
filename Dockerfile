@@ -21,10 +21,11 @@ RUN apt-get update -y && apt-get install -y \
   libpng-dev \
   libpq-dev \
   libicu-dev \
+  unixodbc-dev \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
-
+  
 # Install default PHP Extensions
 RUN docker-php-ext-install -j$(nproc) \
   bcmath \
@@ -77,6 +78,10 @@ RUN apt-get update -y && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
+
+$PDO_MSSQL
+RUN pecl install sqlsrv pdo_sqlsrv &&  docker-php-ext-enable pdo_sqlsrv
+
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   apt-get update && \
