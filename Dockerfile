@@ -2,11 +2,9 @@ FROM php:7.4-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-  curl https://packages.microsoft.com/config/ubuntu/20.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
-  
 RUN apt-get update -y && apt-get install -y \
   curl \
+  wget \
   git-core \
   gzip \
   openssh-client \
@@ -28,8 +26,12 @@ RUN apt-get update -y && apt-get install -y \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
 
-RUN sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
-  sudo ACCEPT_EULA=Y apt-get install -y mssql-tools
+RUN wget https://packages.microsoft.com/keys/microsoft.asc && apt-key add microsoft.asc && \
+  curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+RUN apt-get update && \
+  ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
+  ACCEPT_EULA=Y apt-get install -y mssql-tools
 
 # Install default PHP Extensions
 RUN docker-php-ext-install -j$(nproc) \
@@ -61,7 +63,6 @@ RUN apt-get update -y && apt-get install -y \
   apt-mark auto \
   zlib1g-dev \
   libicu-dev \
-  g++ \
   libldap2-dev \
   libxml2-dev \
   libxslt-dev && \
@@ -86,6 +87,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
 
 #PDO_MSSQL
 RUN pecl install sqlsrv pdo_sqlsrv &&  docker-php-ext-enable pdo_sqlsrv
+RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr
 
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
