@@ -2,7 +2,9 @@ FROM php:7.4-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
-
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+  curl https://packages.microsoft.com/config/ubuntu/20.10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+  
 RUN apt-get update -y && apt-get install -y \
   curl \
   git-core \
@@ -25,7 +27,10 @@ RUN apt-get update -y && apt-get install -y \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
-  
+
+RUN sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17 && \
+  sudo ACCEPT_EULA=Y apt-get install -y mssql-tools
+
 # Install default PHP Extensions
 RUN docker-php-ext-install -j$(nproc) \
   bcmath \
