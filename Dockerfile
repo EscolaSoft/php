@@ -119,9 +119,7 @@ RUN { \
 RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   echo "date.timezone = Europe/Warsaw" > /usr/local/etc/php/conf.d/timezone.ini && \
   echo "log_errors = On\nerror_log = /dev/stderr" > /usr/local/etc/php/conf.d/errors.ini && \
-  a2enmod rewrite expires remoteip cgid && \
-  usermod -u 1000 www-data && \
-  usermod -G staff www-data
+  a2enmod rewrite expires remoteip cgid
 
 EXPOSE 80
 CMD ["apache2-foreground"]
