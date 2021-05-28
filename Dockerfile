@@ -119,5 +119,11 @@ RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   echo "log_errors = On\nerror_log = /dev/stderr" > /usr/local/etc/php/conf.d/errors.ini && \
   a2enmod rewrite expires remoteip cgid
 
+# Fix for guzzle
+RUN apt-get update -yqq \
+  && apt-get install -y --no-install-recommends openssl \
+  && sed -i -E 's/(CipherString\s*=\s*DEFAULT@SECLEVEL=)2/\11/' /etc/ssl/openssl.cnf \
+  && rm -rf /var/lib/apt/lists/*
+
 EXPOSE 80
 CMD ["apache2-foreground"]
