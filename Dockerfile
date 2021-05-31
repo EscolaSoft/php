@@ -97,6 +97,9 @@ RUN apt-get update -yqq \
   && sed -i -E 's/(CipherString\s*=\s*DEFAULT@SECLEVEL=)2/\11/' /etc/ssl/openssl.cnf \
   && rm -rf /var/lib/apt/lists/*
 
+#redis
+RUN pecl install redis && docker-php-ext-enable redis
+
 # Apache + xdebug configuration
 RUN { \
   echo "<VirtualHost *:80>"; \
