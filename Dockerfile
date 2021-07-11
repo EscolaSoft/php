@@ -10,18 +10,6 @@ RUN apt-get update -y && apt-get install -y \
   openssh-client \
   unzip \
   zip \
-  gcc \
-  g++ \
-  make \
-  sudo \
-  gnupg \
-  gnupg2 \
-  zlib1g-dev \
-  zlib1g \
-  libpng-dev \
-  libpq-dev \
-  libicu-dev \
-  supervisor \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -31,13 +19,7 @@ RUN docker-php-ext-install -j$(nproc) \
   bcmath \
   mysqli \
   pdo \
-  pdo_mysql \
-  gd \
-  pdo_pgsql \
-  pgsql \
-  intl \
-  calendar \
-  pcntl
+  pdo_mysql
 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
@@ -61,7 +43,7 @@ RUN apt-get update -y && apt-get install -y \
   libxslt-dev && \
   docker-php-ext-configure intl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
-  docker-php-ext-configure gd --with-freetype --with-jpeg && \
+  docker-php-ext-configure gd && \
   docker-php-ext-install -j$(nproc) \
   intl \
   ldap \
@@ -72,14 +54,10 @@ RUN apt-get update -y && apt-get install -y \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
-  
-RUN pecl install -o -f redis \
-&&  rm -rf /tmp/pear \
-&&  docker-php-ext-enable redis
 
 #Add Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
-  php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
+  php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
   rm *
 
 # Apache + xdebug configuration
@@ -90,7 +68,7 @@ RUN { \
   echo "  ErrorLog /var/log/apache2/error.log"; \
   echo "  CustomLog /var/log/apache2/access.log combined"; \
   echo "  ServerSignature Off"; \
-  echo "  <Directory /var/www/html/public>"; \
+  echo "  <Directory /var/www/html>"; \
   echo "    Options +FollowSymLinks"; \
   echo "    Options -ExecCGI -Includes -Indexes"; \
   echo "    AllowOverride all"; \
