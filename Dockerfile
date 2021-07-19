@@ -60,6 +60,15 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
   rm *
 
+RUN echo "log_errors = On" >> /usr/local/etc/php/php.ini
+RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini
+RUN echo "display_startup_errors = On" >> /usr/local/etc/php/php.ini
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini
+RUN echo "error_log = /dev/stdout" >> /usr/local/etc/php/php.ini
+RUN echo 'post_max_size = 500M' >> 	/usr/local/etc/php/php.ini
+RUN echo 'upload_max_filesize =  500M' >> 	/usr/local/etc/php/php.ini
+RUN echo 'date.timezone = "Europe/Warsaw"' >> 	/usr/local/etc/php/php.ini
+
 # Apache + xdebug configuration
 RUN { \
   echo "<VirtualHost *:80>"; \
