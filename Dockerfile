@@ -77,7 +77,20 @@ RUN echo 'post_max_size = 500M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'upload_max_filesize =  500M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'date.timezone = "Europe/Warsaw"' >> 	/usr/local/etc/php/php.ini
 
-# Apache + xdebug configuration
+#NODE
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+  apt-get update && \
+  apt-get -y install nodejs gcc g++ make && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
+  
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt update && apt -y install yarn && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
+
+# Apache
 RUN { \
   echo "<VirtualHost *:80>"; \
   echo "  DocumentRoot /var/www/html/public"; \
