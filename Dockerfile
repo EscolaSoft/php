@@ -10,6 +10,7 @@ RUN apt-get update -y && apt-get install -y \
   openssh-client \
   unzip \
   zip \
+  libpq-dev \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -19,7 +20,7 @@ RUN docker-php-ext-install -j$(nproc) \
   bcmath \
   mysqli \
   pdo \
-  pdo_mysql
+  pdo_pgsql
 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
@@ -54,6 +55,8 @@ RUN apt-get update -y && apt-get install -y \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install sockets
 
 #REDIS
 RUN pecl install -o -f redis && \
