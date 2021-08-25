@@ -60,6 +60,10 @@ RUN apt-get update -y && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
   rm *
+  
+#PHP.ini upload 256M
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+  sed -i 's/2M/256M/g' /usr/local/etc/php/php.ini
 
 # Apache + xdebug configuration
 RUN { \
