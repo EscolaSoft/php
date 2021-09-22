@@ -49,7 +49,7 @@ RUN apt-get update -y && apt-get install -y \
   docker-php-ext-install -j$(nproc) \
   intl \
   ldap \
-  gd \
+  gd --with-freetype --with-jpeg \
   soap \
   tidy \
   xsl \
