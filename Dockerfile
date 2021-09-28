@@ -43,7 +43,7 @@ RUN apt-get update -y && apt-get install -y \
   libxslt-dev && \
   docker-php-ext-configure intl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
-  docker-php-ext-configure gd && \
+  docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) \
   intl \
   ldap \
