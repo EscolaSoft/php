@@ -37,7 +37,8 @@ RUN docker-php-ext-install -j$(nproc) \
   intl \
   calendar \
   pcntl \
-  exif
+  exif \
+  calendar
 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
