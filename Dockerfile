@@ -19,7 +19,8 @@ RUN docker-php-ext-install -j$(nproc) \
   bcmath \
   mysqli \
   pdo \
-  pdo_mysql
+  pdo_mysql \
+  pcntl
 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
