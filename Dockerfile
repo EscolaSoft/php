@@ -94,7 +94,12 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
 
-# Apache + xdebug configuration
+#PHP
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+  sudo sed -i 's/128M/2G/g' /usr/local/etc/php/php.ini
+  
+  
+# Apache 
 RUN { \
   echo "<VirtualHost *:80>"; \
   echo "  DocumentRoot /var/www/html/public"; \
