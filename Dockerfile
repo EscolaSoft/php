@@ -60,7 +60,19 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
   rm *
 
-# Apache + xdebug configuration
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+  apt-get update && \
+  apt-get -y install nodejs gcc g++ make && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt update && apt -y install yarn && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
+
+# Apache 
 RUN { \
   echo "<VirtualHost *:80>"; \
   echo "  DocumentRoot /var/www/html/public"; \
