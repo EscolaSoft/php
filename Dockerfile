@@ -72,7 +72,7 @@ RUN apt-get update -y && apt-get install -y \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
-  
+
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
@@ -82,13 +82,15 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
 
-# Apache + xdebug configuration
+# Apache 
 RUN { \
   echo "<VirtualHost *:80>"; \
   echo "  DocumentRoot /var/www/html/public"; \
   echo "  LogLevel warn"; \
   echo "  ErrorLog /var/log/apache2/error.log"; \
   echo "  CustomLog /var/log/apache2/access.log combined"; \
+  echo "  RequestHeader set X-Forwarded-Proto https"; \
+  echo "  RequestHeader set X-Forwarded-SSL https"; \
   echo "  ServerSignature Off"; \
   echo "  <Directory /var/www/html/public>"; \
   echo "    Options +FollowSymLinks"; \
@@ -108,7 +110,7 @@ RUN { \
 RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   echo "date.timezone = Europe/Warsaw" > /usr/local/etc/php/conf.d/timezone.ini && \
   echo "log_errors = On\nerror_log = /dev/stderr" > /usr/local/etc/php/conf.d/errors.ini && \
-  a2enmod rewrite expires remoteip cgid && \
+  a2enmod rewrite expires remoteip cgid headers && \
   usermod -u 1000 www-data && \
   usermod -G staff www-data
 
