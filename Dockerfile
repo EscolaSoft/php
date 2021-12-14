@@ -97,7 +97,9 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 #PHP
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
   sed -i 's/128M/4G/g' /usr/local/etc/php/php.ini && \
-  sed -i 's/8M/512M/g' /usr/local/etc/php/php.ini
+  sed -i 's/8M/512M/g' /usr/local/etc/php/php.ini && \
+  sed -i 's/ 2M/ 512M/g' /usr/local/etc/php/php.ini
+  
 
   
   
