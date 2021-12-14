@@ -82,7 +82,7 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
 
-RUN curl -sL https://deb.nodesource.com/setup_17.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
   apt-get update && \
   apt-get -y install nodejs gcc g++ make && \
   apt-get autoremove -y && \
