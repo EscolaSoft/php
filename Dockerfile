@@ -63,6 +63,7 @@ RUN apt-get update -y && apt-get install -y \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) \
+  opcache \
   intl \
   ldap \
   gd \
