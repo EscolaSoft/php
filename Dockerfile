@@ -133,5 +133,8 @@ RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
   usermod -u 1000 www-data && \
   usermod -G staff www-data
 
+#APACHE homedir user 
+RUN chown -R www-data:www-data /var/www
+
 EXPOSE 80
 CMD ["apache2-foreground"]
