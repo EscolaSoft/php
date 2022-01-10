@@ -6,8 +6,7 @@ RUN apt-get update -yqq && apt-get dist-upgrade -yqq && apt-get install -y git c
   rm -rf /var/lib/apt/lists/*
 
 # Install php extensions
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install pdo_sqlite
+RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install json
 RUN docker-php-ext-install calendar
@@ -19,7 +18,7 @@ RUN docker-php-ext-install bz2
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install mcrypt
 RUN docker-php-ext-install curl
-RUN docker-php-ext-install pdo pdo_mysql xsl pdo_pgsql
+RUN docker-php-ext-install xsl
 
 # Install PECL extensions
 #RUN docker-php-ext-install phar
