@@ -6,7 +6,7 @@ RUN apt-get update -yqq && apt-get dist-upgrade -yqq && apt-get install -y git c
   rm -rf /var/lib/apt/lists/*
 
 # Install php extensions
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli mysql pdo_mysql pdo
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install json
 RUN docker-php-ext-install calendar
