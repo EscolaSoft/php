@@ -45,11 +45,6 @@ RUN echo "error_log = /dev/stdout" >> /usr/local/etc/php/php.ini
 RUN echo 'post_max_size = 200M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'upload_max_filesize =  200M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'date.timezone = "Europe/Warsaw"' >> 	/usr/local/etc/php/php.ini
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/php.ini
-RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/php.ini
-RUN echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/php.ini
-RUN echo "xdebug.remote_host=172.18.0.1" >> /usr/local/etc/php/php.ini
-RUN echo "extension=oci8.so" >> /usr/local/etc/php/php.ini
 
 RUN { \
   echo "<VirtualHost *:80>"; \
