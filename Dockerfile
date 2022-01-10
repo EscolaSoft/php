@@ -1,5 +1,4 @@
-FROM php:7.0-apache
-
+FROM php:5.6-apache
 
 # Install developer dependencies
 RUN apt-get update -yqq && apt-get dist-upgrade -yqq && apt-get install -y git curl libaio1 unzip libaio1 libxslt-dev libsqlite3-dev libsqlite3-0 libxml2-dev libicu-dev libfreetype6-dev libmcrypt-dev git libcurl4-gnutls-dev libbz2-dev libssl-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmagickwand-dev mcrypt -yqq && \
@@ -23,24 +22,10 @@ RUN docker-php-ext-install curl
 RUN docker-php-ext-install pdo pdo_mysql xsl pdo_pgsql
 
 # Install PECL extensions
-RUN docker-php-ext-install phar
+#RUN docker-php-ext-install phar
 RUN docker-php-ext-install intl
 RUN pecl install imagick
 RUN docker-php-ext-enable imagick
-
-
-
-RUN mkdir /opt/oracle \
-    && curl 'https://download.oracle.com/otn_software/linux/instantclient/19600/instantclient-basic-linux.x64-19.6.0.0.0dbru.zip' --output /opt/oracle/instantclient-basic-linux.zip \
-    && curl 'https://download.oracle.com/otn_software/linux/instantclient/19600/instantclient-sdk-linux.x64-19.6.0.0.0dbru.zip' --output /opt/oracle/instantclient-sdk-linux.zip \
-    && unzip '/opt/oracle/instantclient-basic-linux.zip' -d /opt/oracle \
-    && unzip '/opt/oracle/instantclient-sdk-linux.zip' -d /opt/oracle \
-    && rm /opt/oracle/instantclient-*.zip \
-    && mv /opt/oracle/instantclient_* /opt/oracle/instantclient \
-    && docker-php-ext-configure oci8 --with-oci8=instantclient,/opt/oracle/instantclient \
-    && docker-php-ext-install oci8 \
-    && echo /opt/oracle/instantclient/ > /etc/ld.so.conf.d/oracle-insantclient.conf \
-    && ldconfig
 
 RUN a2enmod  rewrite \
     && a2enmod deflate \
