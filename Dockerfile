@@ -68,7 +68,8 @@ RUN { \
   echo "</VirtualHost>"; \
   } | tee /etc/apache2/sites-available/000-default.conf
 
-
+RUN usermod -u 1000 www-data && \
+  usermod -G staff www-data
 
 ENV TERM=xterm \
 TZ=Europe/Warsaw
