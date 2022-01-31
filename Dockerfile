@@ -77,6 +77,9 @@ RUN apt-get update -y && apt-get install -y \
 #REDIS
 RUN pecl install redis && docker-php-ext-enable redis
 
+#PCOV
+RUN pecl install pcov && docker-php-ext-enable pcov
+
 #Add Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
