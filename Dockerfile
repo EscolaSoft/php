@@ -22,6 +22,7 @@ RUN apt-get update -y && apt-get install -y \
   libpq-dev \
   libicu-dev \
   libc-client-dev \
+  libkrb5-dev \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
