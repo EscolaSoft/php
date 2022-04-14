@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.0-apache
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
