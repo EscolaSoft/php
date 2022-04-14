@@ -38,8 +38,7 @@ RUN docker-php-ext-install -j$(nproc) \
   calendar \
   pcntl \
   exif \
-  calendar
-
+  calendar 
 
 # Install Intl, LDAP, GD, SOAP, Tidy, XSL, Zip PHP Extensions
 RUN apt-get update -y && apt-get install -y \
@@ -61,6 +60,7 @@ RUN apt-get update -y && apt-get install -y \
   libxml2-dev \
   libxslt-dev && \
   docker-php-ext-configure intl && \
+  docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) \
@@ -70,6 +70,7 @@ RUN apt-get update -y && apt-get install -y \
   soap \
   tidy \
   xsl \
+  imap \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
@@ -85,27 +86,12 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-  apt-get update && \
-  apt-get -y install nodejs gcc g++ make && \
-  apt-get autoremove -y && \
-  rm -rf /var/lib/apt/lists/*
-
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt update && apt -y install yarn && \
-  apt-get autoremove -y && \
-  rm -rf /var/lib/apt/lists/*
-
 #PHP
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
   sed -i 's/128M/4G/g' /usr/local/etc/php/php.ini && \
   sed -i 's/8M/512M/g' /usr/local/etc/php/php.ini && \
   sed -i 's/ 2M/ 512M/g' /usr/local/etc/php/php.ini
-  
-
-  
-  
+   
 # Apache 
 RUN { \
   echo "<VirtualHost *:80>"; \
