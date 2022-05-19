@@ -12,7 +12,7 @@ RUN apt-get update -y \
     libxml2-dev \
     libwebp-dev \
     libaom-dev \
-    libavif-dev
+    libavif-dev \
     zip \
     unzip && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
