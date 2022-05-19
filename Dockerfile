@@ -10,6 +10,9 @@ RUN apt-get update -y \
     zlib1g-dev \
     libzip-dev \
     libxml2-dev \
+    libwebp-dev \
+    libaom-dev \
+    libavif-dev
     zip \
     unzip && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
@@ -19,10 +22,14 @@ RUN apt-get update -y \
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
 ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions gd
+    
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd \
+    && docker-php-ext-configure gd --with-jpeg --with-webp --with-avif && docker-php-ext-install gd \
     && docker-php-ext-install bcmath \
     && apt-get remove libicu-dev icu-devtools -y
 
