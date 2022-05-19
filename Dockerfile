@@ -29,7 +29,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && docker-php-ext-configure gd --with-jpeg --with-webp --with-avif && docker-php-ext-install gd \
+    && docker-php-ext-configure gd --with-jpeg --with-webp --with-avif \
     && docker-php-ext-install bcmath \
     && apt-get remove libicu-dev icu-devtools -y
 
