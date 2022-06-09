@@ -33,6 +33,10 @@ RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install bcmath \
     && apt-get remove libicu-dev icu-devtools -y
 
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+  sed -i 's/ 2M/ 128M/g' /usr/local/etc/php/php.ini && \
+  sed -i 's/ 8M/ 128M/g' /usr/local/etc/php/php.ini
+
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
   rm *
