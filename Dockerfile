@@ -82,6 +82,10 @@ RUN pecl install redis && docker-php-ext-enable redis
 #PCOV
 RUN pecl install pcov && docker-php-ext-enable pcov
 
+#MongoDB
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+
 #Add Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \
   php composer-setup.php --install-dir=/usr/local/bin --filename=composer  && \
