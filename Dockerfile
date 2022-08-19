@@ -41,7 +41,7 @@ RUN apt-get update -y && apt-get install -y \
   g++ \
   libldap2-dev \
   libxml2-dev \
-  libxslt-dev && \
+  libxslt-dev \
   ffmpeg && \
   docker-php-ext-configure intl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
