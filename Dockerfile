@@ -41,8 +41,7 @@ RUN apt-get update -y && apt-get install -y \
   g++ \
   libldap2-dev \
   libxml2-dev \
-  libxslt-dev \
-  ffmpeg && \
+  libxslt-dev && \
   docker-php-ext-configure intl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
@@ -56,6 +55,9 @@ RUN apt-get update -y && apt-get install -y \
   zip && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
+
+#ffmpeg
+RUN apt-get update -y && apt-get install -y ffmpeg
 
 #REDIS
 RUN pecl install -o -f redis && \
