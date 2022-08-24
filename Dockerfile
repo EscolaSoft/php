@@ -57,7 +57,9 @@ RUN apt-get update -y && apt-get install -y \
   rm -rf /var/lib/apt/lists/*
 
 #ffmpeg
-RUN apt-get update -y && apt-get install -y ffmpeg
+RUN apt-get update -y && apt-get install -y ffmpeg && \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+  rm -rf /var/lib/apt/lists/*
 
 #REDIS
 RUN pecl install -o -f redis && \
