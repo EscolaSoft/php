@@ -79,6 +79,7 @@ RUN echo "error_log = /dev/stdout" >> /usr/local/etc/php/php.ini
 RUN echo 'post_max_size = 500M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'upload_max_filesize =  500M' >> 	/usr/local/etc/php/php.ini
 RUN echo 'date.timezone = "Europe/Warsaw"' >> 	/usr/local/etc/php/php.ini
+RUN echo 'memory_limit = 256M' >> 	/usr/local/etc/php/php.ini
 
 # Apache + xdebug configuration
 RUN { \
