@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && apt-get install -y \
   curl \
   git-core \
+  git \
   gzip \
   openssh-client \
   unzip \
