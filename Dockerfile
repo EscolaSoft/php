@@ -53,6 +53,8 @@ RUN apt-get update -y && apt-get install -y \
   libtidy-dev \
   libxml2-dev \
   libxslt-dev \
+  nodejs \
+  npm \
   --no-install-recommends && \
   apt-mark auto \
   zlib1g-dev \
