@@ -77,7 +77,7 @@ RUN apt-get update -y && apt-get install -y \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
   rm -rf /var/lib/apt/lists/*
   
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
   apt-get update && \
   apt-get -y install nodejs gcc g++ make && \
   apt-get autoremove -y && \
