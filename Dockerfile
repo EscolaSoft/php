@@ -23,6 +23,8 @@ RUN apt-get update -y && apt-get install -y \
   libicu-dev \
   libc-client-dev \
   libkrb5-dev \
+  odbcinst \
+  unixodbc \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -62,6 +64,7 @@ RUN apt-get update -y && apt-get install -y \
   libxml2-dev \
   libxslt-dev && \
   docker-php-ext-configure intl && \
+  docker-php-ext-configure odbc && \
   docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
