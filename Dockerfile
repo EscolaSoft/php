@@ -25,6 +25,7 @@ RUN apt-get update -y && apt-get install -y \
   libkrb5-dev \
   odbcinst \
   unixodbc \
+  unixodbc-dev \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
