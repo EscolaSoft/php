@@ -26,6 +26,9 @@ RUN apt-get update -y && apt-get install -y \
   odbcinst \
   unixodbc \
   unixodbc-dev \
+  odbcinst \
+  unixodbc \
+  wget \
   --no-install-recommends && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -65,7 +68,6 @@ RUN apt-get update -y && apt-get install -y \
   libxml2-dev \
   libxslt-dev && \
   docker-php-ext-configure intl && \
-  docker-php-ext-configure odbc && \
   docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
@@ -92,6 +94,10 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   apt update && apt -y install yarn && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
+
+#ODBC
+RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr && \
+  docker-php-ext-install pdo_odbc
 
 #REDIS
 RUN pecl install redis && docker-php-ext-enable redis
