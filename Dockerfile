@@ -1,5 +1,5 @@
 FROM php:8.4.3-zts-bullseye
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     git curl libzip-dev unzip && \
     docker-php-ext-install zip && \
     # Install install-php-extensions
