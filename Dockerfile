@@ -20,4 +20,5 @@ RUN install-php-extensions \
     ctype \
     opcache \
     redis
-
+    
+RUN apt-get update && apt-get upgrade -y && apt-get remove curl -y &&  apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
