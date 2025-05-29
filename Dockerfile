@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1.5.0-php8.4.6-bookworm
+FROM dunglas/frankenphp:1.6.2-php8.4.7-bookworm
 
 RUN \
     apt-get -y update && \
