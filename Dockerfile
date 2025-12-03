@@ -62,7 +62,7 @@ RUN apt-get update -y && apt-get install -y ffmpeg && \
   rm -rf /var/lib/apt/lists/*
 
 #REDIS
-RUN pecl install -o -f redis-6.2 && \
+RUN pecl install -o -f redis-6.1 && \
   rm -rf /tmp/pear && \
   docker-php-ext-enable redis
 
