@@ -62,7 +62,7 @@ RUN apt-get update -y && apt-get install -y ffmpeg && \
   rm -rf /var/lib/apt/lists/*
 
 #REDIS
-RUN pecl install -o -f redis && \
+RUN pecl install -o -f redis-6.2 && \
   rm -rf /tmp/pear && \
   docker-php-ext-enable redis
 
@@ -113,4 +113,3 @@ RUN echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf && \
 
 EXPOSE 80
 CMD ["apache2-foreground"]
-
