@@ -1,4 +1,4 @@
-FROM php:8.3.14-apache
+FROM php:8.4.17-alpine3.23
 MAINTAINER Gutar "<admin@escolasoft.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
