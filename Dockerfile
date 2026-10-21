@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1.12.1-php8.4.19-trixie
+FROM dunglas/frankenphp:1.13.2-php8.4.27-trixie
 
 RUN \
     apt-get -y update && \
